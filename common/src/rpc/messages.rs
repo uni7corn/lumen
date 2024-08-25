@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::borrow::Cow;
 
 #[derive(Deserialize, Serialize)]
@@ -106,15 +106,20 @@ pub struct DelHistoryResult {
     pub deleted_mds: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Default)]
+pub struct LicenseInfo<'a> {
+    pub id: Cow<'a, str>,
+    pub name: Cow<'a, str>,
+    pub email: Cow<'a, str>,
+}
+
+#[derive(Debug, Deserialize, Serialize, Default)]
 pub struct HelloResult<'a> {
-    pub unk0: Cow<'a, str>,
-    pub unk1: Cow<'a, str>,
-    pub unk2: Cow<'a, str>,
-    pub unk3: Cow<'a, str>,
-    pub unk4: u32,
-    pub unk5: u64,
-    pub unk6: u32,
+    pub license_info: LicenseInfo<'a>,
+    pub username: Cow<'a, str>,
+    pub karma: u32,
+    pub last_active: u64,
+    pub features: u32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
